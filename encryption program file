@@ -1,0 +1,57 @@
+import random
+import string
+
+chars = " " + string.punctuation + string.digits + string.ascii_letters
+#" " (space):Adds a space character to the list to allow encryption of messages with spaces.
+#string.punctuation Contains special characters such as: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~ >>>>
+#These symbols are useful for enhancing encryption security.
+#string.digits Contains numbers from 0 to 9: 0123456789
+#string.ascii_letters:Contains lowercase and uppercase English letters: >>>
+# abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+chars = list(chars)
+#converts this string into a list, where each character becomes an individual element.
+key = chars.copy()
+# key is a copy of the chars list. It is used for mapping characters during encryption and decryption.
+#copy():Creates an independent duplicate of the chars list. Any changes to key will not affect the original chars.
+
+
+random.shuffle(chars)
+#randomly rearranges the order of elements in the chars list.
+#Each time the program runs, the order of chars changes, making the encryption unique.
+#print(f"chars:{chars}")
+#Represents the original characters.
+#print(f"key : {key}")
+#Represents the shuffled characters for encryption.
+
+
+#ENCRYPT
+plain_text = input("Enter a massage to encrypt: ")
+cipher_text = ""
+
+for letter in plain_text:
+    index = chars.index(letter)
+    cipher_text += key[index]
+
+print(f"original text: {plain_text}")
+print(f"encrypted text: {cipher_text}")
+
+
+#DECRYPT
+cipher_text = input("Enter a massage to encrypt: ")
+#The program asks the user to input the encrypted message (cipher text) that they want to decrypt.
+plain_text = ""
+#An empty string initialized to store the decrypted (original) text as the program processes each character.
+
+for letter in cipher_text:
+    #Iterate through cipher_text: The program processes each character (letter) in the encrypted text.
+    index = key.index(letter)
+    #Find the index in key: key.index(letter) looks up the position (index) of the character letter in the key list.
+    plain_text += chars[index]
+    #The original character from chars is appended to plain_text.
+
+print(f"original text: {cipher_text}")
+#Displays the input cipher text (encrypted message).
+
+print(f"encrypted text: {plain_text}")
+#Displays the original (decrypted) text.
